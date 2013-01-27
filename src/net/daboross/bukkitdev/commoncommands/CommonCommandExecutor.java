@@ -3,7 +3,6 @@ package net.daboross.bukkitdev.commoncommands;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -24,13 +23,11 @@ public class CommonCommandExecutor implements CommandExecutor {
     private final Map<String, String> helpList = new HashMap<String, String>();
     private final Map<String, String[]> helpAliasMap = new HashMap<String, String[]>();
     private final Map<String, String> permMap = new HashMap<String, String>();
-    private CommonCommands pluginMain;
 
     /**
      *
      */
-    protected CommonCommandExecutor(CommonCommands mainPlugin) {
-        pluginMain = mainPlugin;
+    protected CommonCommandExecutor() {
         initCommand("help", new String[]{"?"}, true, "commoncommands.help", "This Command Views This Page");
         initCommand("getplayernamelist", new String[]{"gpnl"}, true, "commomcommands.getplayernamelist", "This Command Gets a list of online players and their display names");
         initCommand("curseme", new String[]{"cm"}, false, "commoncommands.curseme", "This Command Curses You");

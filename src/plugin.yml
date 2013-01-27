@@ -1,6 +1,9 @@
 name: CommonCommands
 main: net.daboross.bukkitdev.commoncommands.CommonCommands
-version: 0.0
+version: 0.2
+description: Common Commands For Newlanders!
+author: Dabo Ross
+depend: [PermissionsEx]
 
 commands:
    cc:
@@ -12,6 +15,10 @@ commands:
       usage: /<command> STUFF TO COLORIZE
       aliases: [ccc, ct]
    setdabo:
+   pvp:
+     description: This command puts you into the PvP world
+     usage: /<command>
+     aliases: [pvpme, pvpwarp]
 permissions:
   commoncommands.*:
     description: Gives access to all CommonCommands Commands
