@@ -33,6 +33,9 @@ public class PvPClass implements Listener, CommandExecutor {
             if (worldName.equals("pvpworld")) {
                 pvp(evt.getPlayer());
                 evt.setCancelled(true);
+            } else if (worldName.equals("lethamyr") && !evt.getFrom().getWorld().getName().toLowerCase().equals("lethamyr")) {
+                world(evt.getPlayer(), "WorldWarpLethamyr");
+                evt.setCancelled(true);
             }
         }
     }
@@ -44,6 +47,13 @@ public class PvPClass implements Listener, CommandExecutor {
         n += 1;
         p.performCommand("ewarp PvP" + n);
         p.sendMessage(ColorList.MAIN + "PVP!");
+        makeExtraThread(p);
+    }
+
+    protected void world(Player p, String warp) {
+        pvpP.add(p);
+        p.performCommand("ewarp " + warp);
+        p.sendMessage(ColorList.MAIN + warp);
         makeExtraThread(p);
     }
 
