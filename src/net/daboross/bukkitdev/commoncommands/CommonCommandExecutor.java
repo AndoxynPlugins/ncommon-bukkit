@@ -25,24 +25,16 @@ public class CommonCommandExecutor extends CommandExecutorBase {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("cc")) {
-            String commandName = isCommandValid(sender, cmd, label, args);
-            if (commandName == null) {
-                return true;
-            }
-            if (commandName.equalsIgnoreCase("help")) {
-                runHelpCommand(sender, cmd, getSubArray(args));
-            } else if (commandName.equalsIgnoreCase("curseme")) {
-                runCurseMeCommand(sender, cmd, getSubArray(args));
-            } else if (commandName.equalsIgnoreCase("uncurseme")) {
-                runUnCurseMeCommand(sender, cmd, getSubArray(args));
-            } else if (commandName.equalsIgnoreCase("getplayernamelist")) {
-                runGetPlayerNameListCommand(sender, cmd, getSubArray(args));
-            }
-            return true;
+    public void runCommand(CommandSender sender, Command mainCommand, String mainCommandLabel, String subCommand, String subCommandLabel, String[] subCommandArgs) {
+        if (subCommand.equalsIgnoreCase("help")) {
+            runHelpCommand(sender, mainCommand, subCommandArgs);
+        } else if (subCommand.equalsIgnoreCase("curseme")) {
+            runCurseMeCommand(sender, mainCommand, subCommandArgs);
+        } else if (subCommand.equalsIgnoreCase("uncurseme")) {
+            runUnCurseMeCommand(sender, mainCommand, subCommandArgs);
+        } else if (subCommand.equalsIgnoreCase("getplayernamelist")) {
+            runGetPlayerNameListCommand(sender, mainCommand, subCommandArgs);
         }
-        return false;
     }
 
     private void runGetPlayerNameListCommand(CommandSender sender, Command cmd, String[] args) {
@@ -66,5 +58,10 @@ public class CommonCommandExecutor extends CommandExecutorBase {
         Player player = (Player) sender;
         player.removePotionEffect(PotionEffectType.SLOW);
         sender.sendMessage(ChatColor.BLUE + "You Are No Longer Cursed");
+    }
+
+    @Override
+    public String getCommandName() {
+        return "cc";
     }
 }

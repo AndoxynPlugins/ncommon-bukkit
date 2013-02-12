@@ -4,6 +4,7 @@ package net.daboross.bukkitdev.commoncommands;
  *
  * @author daboross
  */
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import org.bukkit.command.Command;
@@ -74,10 +75,16 @@ public final class CommonCommands extends JavaPlugin {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        getLogger().log(Level.INFO, "Tried to Run Command: " + cmd.getName());
+        getLogger().log(Level.INFO, "Tried to Run Command: {0}", cmd.getName());
         return false;
     }
 
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        return super.onTabComplete(sender, command, alias, args);
+    }
+
+    
     public static CommonCommands getCurrentInstance() {
         return instance;
     }
