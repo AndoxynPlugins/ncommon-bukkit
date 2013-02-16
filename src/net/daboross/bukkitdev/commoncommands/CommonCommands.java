@@ -84,7 +84,6 @@ public final class CommonCommands extends JavaPlugin {
         return super.onTabComplete(sender, command, alias, args);
     }
 
-    
     public static CommonCommands getCurrentInstance() {
         return instance;
     }
