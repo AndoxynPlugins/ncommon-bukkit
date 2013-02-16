@@ -26,9 +26,7 @@ public class CommonCommandExecutor extends CommandExecutorBase {
 
     @Override
     public void runCommand(CommandSender sender, Command mainCommand, String mainCommandLabel, String subCommand, String subCommandLabel, String[] subCommandArgs) {
-        if (subCommand.equalsIgnoreCase("help")) {
-            runHelpCommand(sender, mainCommand, subCommandArgs);
-        } else if (subCommand.equalsIgnoreCase("curseme")) {
+        if (subCommand.equalsIgnoreCase("curseme")) {
             runCurseMeCommand(sender, mainCommand, subCommandArgs);
         } else if (subCommand.equalsIgnoreCase("uncurseme")) {
             runUnCurseMeCommand(sender, mainCommand, subCommandArgs);
