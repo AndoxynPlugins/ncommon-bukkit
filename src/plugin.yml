@@ -11,10 +11,6 @@ commands:
       description: This is the CommonCommands Commands. Everything else is a sub command of this
       usage: /<command> ?
       aliases: [commonc, commoncommands, ccommands]
-   color:
-      description: Colorize Text!
-      usage: /<command> STUFF TO COLORIZE
-      aliases: [ccc, ct]
    setdabo:
    pvp:
      description: This command puts you into the PvP world

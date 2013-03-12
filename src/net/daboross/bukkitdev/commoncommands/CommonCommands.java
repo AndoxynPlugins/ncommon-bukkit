@@ -28,18 +28,12 @@ public final class CommonCommands extends JavaPlugin {
     public void onEnable() {
         PvPClass pvpClass = new PvPClass();
         PluginCommand cc = getCommand("cc");
-        PluginCommand color = getCommand("color");
         PluginCommand setdabo = getCommand("setdabo");
         PluginCommand pvp = getCommand("pvp");
         if (cc != null) {
             cc.setExecutor(new CommonCommandExecutor());
         } else {
             getLogger().severe("Command CC is null");
-        }
-        if (color != null) {
-            color.setExecutor(new ColorCommandExecutor());
-        } else {
-            getLogger().severe("Command COLOR is null");
         }
         if (pvp != null) {
             pvp.setExecutor(pvpClass);
