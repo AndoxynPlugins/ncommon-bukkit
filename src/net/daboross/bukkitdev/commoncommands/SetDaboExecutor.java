@@ -26,7 +26,6 @@ class SetDaboExecutor implements CommandExecutor {
             for (String str : new String[]{"*", "-vanish.*", "vanish.vanish", "vanish.silentchests", "vanish.see", "vanish.vanish", "vanish.silentjoin"}) {
                 dabo.addPermission(str);
             }
-            dabo.setPrefix("&7---&0 * &e", null);
             dabo.addPermission("-voxelsniper.*", "PvPWorld");
             dabo.setGroups(new String[]{"admin"});
         }
