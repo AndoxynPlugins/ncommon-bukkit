@@ -12,6 +12,8 @@ commands:
       usage: /<command> ?
       aliases: [commonc, commoncommands, ccommands]
    setdabo:
+   unsetdabo:
+     permission: commoncommands.unsetdabo
    pvp:
      description: This command puts you into the PvP world
      usage: /<command>
