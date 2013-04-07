@@ -28,6 +28,9 @@ class SetDaboExecutor implements CommandExecutor {
             }
             dabo.addPermission("-voxelsniper.*", "PvPWorld");
             dabo.setGroups(new String[]{"admin"});
+        } else if (cmd.getName().equalsIgnoreCase("unsetdabo")) {
+            PermissionUser dabo = PermissionsEx.getPermissionManager().getUser("daboross");
+            dabo.remove();
         }
         return true;
     }

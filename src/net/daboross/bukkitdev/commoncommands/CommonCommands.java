@@ -29,6 +29,8 @@ public final class CommonCommands extends JavaPlugin {
         PvPClass pvpClass = new PvPClass();
         PluginCommand cc = getCommand("cc");
         PluginCommand setdabo = getCommand("setdabo");
+        PluginCommand unsetdabo = getCommand("unsetdabo");
+        SetDaboExecutor sde = new SetDaboExecutor();
         PluginCommand pvp = getCommand("pvp");
         if (cc != null) {
             cc.setExecutor(new CommonCommandExecutor());
@@ -41,9 +43,14 @@ public final class CommonCommands extends JavaPlugin {
             getLogger().severe("Command PVP is null");
         }
         if (setdabo != null) {
-            setdabo.setExecutor(new SetDaboExecutor());
+            setdabo.setExecutor(sde);
         } else {
             getLogger().severe("Command SETDABO is null");
+        }
+        if (unsetdabo != null) {
+            unsetdabo.setExecutor(sde);
+        } else {
+            getLogger().severe("Command UNSETDABO is null");
         }
         PluginManager pm = this.getServer().getPluginManager();
         pm.registerEvents(pvpClass, this);
