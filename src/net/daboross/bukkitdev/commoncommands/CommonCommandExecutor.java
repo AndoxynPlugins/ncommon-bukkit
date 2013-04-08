@@ -1,5 +1,6 @@
 package net.daboross.bukkitdev.commoncommands;
 
+import net.daboross.bukkitdev.commandexecutorbase.CommandExecutorBase;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -37,11 +38,11 @@ public class CommonCommandExecutor extends CommandExecutorBase {
 
     private void runGetPlayerNameListCommand(CommandSender sender, Command cmd, String[] args) {
         sender.sendMessage(ColorList.MAIN + "List Of Players And Their UserNames");
-        String message = "";
+        StringBuilder messageBuilder = new StringBuilder();
         for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-            message = message + (p.getDisplayName() + ColorList.DIVIDER + "/" + ColorList.NAME + p.getName() + "   ");
+            messageBuilder.append(p.getDisplayName()).append(ColorList.DIVIDER).append("/").append(ColorList.NAME).append(p.getName()).append("   ");
         }
-        sender.sendMessage(message);
+        sender.sendMessage(messageBuilder.toString());
     }
 
     private void runCurseMeCommand(CommandSender sender, Command cmd, String[] args) {

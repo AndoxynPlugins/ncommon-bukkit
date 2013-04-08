@@ -1,6 +1,7 @@
 package net.daboross.bukkitdev.commoncommands;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -29,7 +30,7 @@ public class PvPClass implements Listener, CommandExecutor {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerTeleport(PlayerTeleportEvent evt) {
         if (!pvpP.contains(evt.getPlayer())) {
-            String worldName = evt.getTo().getWorld().getName().toLowerCase();
+            String worldName = evt.getTo().getWorld().getName().toLowerCase(Locale.ENGLISH);
             if (worldName.equals("pvpworld")) {
                 pvp(evt.getPlayer());
                 evt.setCancelled(true);

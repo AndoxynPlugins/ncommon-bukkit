@@ -57,22 +57,10 @@ public final class CommonCommands extends JavaPlugin {
         instance = this;
     }
 
-    /**
-     *
-     */
     @Override
     public void onDisable() {
         instance = null;
     }
-    /**
-     *
-     * @param sender
-     * @param cmd
-     * @param label
-     * @param args
-     * @return
-     */
-    private Map<Integer, String> colorMap = new ColorMap();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
