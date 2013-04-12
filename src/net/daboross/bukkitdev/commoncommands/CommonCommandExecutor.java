@@ -19,21 +19,21 @@ public class CommonCommandExecutor extends CommandExecutorBase {
      *
      */
     protected CommonCommandExecutor() {
-        initCommand("help", new String[]{"?"}, true, "commoncommands.help", "This Command Views This Page");
-        initCommand("getplayernamelist", new String[]{"gpnl"}, true, "commomcommands.getplayernamelist", "This Command Gets a list of online players and their display names");
-        initCommand("curseme", new String[]{"cm"}, false, "commoncommands.curseme", "This Command Curses You");
-        initCommand("uncurseme", new String[]{"ucm"}, false, "commoncommands.uncurseme", "This Command Un Curses You");
-    }
-
-    @Override
-    public void runCommand(CommandSender sender, Command mainCommand, String mainCommandLabel, String subCommand, String subCommandLabel, String[] subCommandArgs) {
-        if (subCommand.equalsIgnoreCase("curseme")) {
-            runCurseMeCommand(sender, mainCommand, subCommandArgs);
-        } else if (subCommand.equalsIgnoreCase("uncurseme")) {
-            runUnCurseMeCommand(sender, mainCommand, subCommandArgs);
-        } else if (subCommand.equalsIgnoreCase("getplayernamelist")) {
-            runGetPlayerNameListCommand(sender, mainCommand, subCommandArgs);
-        }
+        initCommand("getplayernamelist", new String[]{"gpnl"}, true, "commomcommands.getplayernamelist", "This Command Gets a list of online players and their display names", new CommandReactor() {
+            public void runCommand(CommandSender sender, Command mainCommand, String mainCommandLabel, String subCommand, String subCommandLabel, String[] subCommandArgs, CommandExecutorBridge executorBridge) {
+                runGetPlayerNameListCommand(sender, mainCommand, subCommandArgs);
+            }
+        });
+        initCommand("curseme", new String[]{"cm"}, false, "commoncommands.curseme", "This Command Curses You", new CommandReactor() {
+            public void runCommand(CommandSender sender, Command mainCommand, String mainCommandLabel, String subCommand, String subCommandLabel, String[] subCommandArgs, CommandExecutorBridge executorBridge) {
+                runCurseMeCommand(sender, mainCommand, subCommandArgs);
+            }
+        });
+        initCommand("uncurseme", new String[]{"ucm"}, false, "commoncommands.uncurseme", "This Command Un Curses You", new CommandReactor() {
+            public void runCommand(CommandSender sender, Command mainCommand, String mainCommandLabel, String subCommand, String subCommandLabel, String[] subCommandArgs, CommandExecutorBridge executorBridge) {
+                runUnCurseMeCommand(sender, mainCommand, subCommandArgs);
+            }
+        });
     }
 
     private void runGetPlayerNameListCommand(CommandSender sender, Command cmd, String[] args) {
@@ -62,5 +62,10 @@ public class CommonCommandExecutor extends CommandExecutorBase {
     @Override
     public String getCommandName() {
         return "cc";
+    }
+
+    @Override
+    protected String getMainCmdPermission() {
+        return "commoncommands.help";
     }
 }
