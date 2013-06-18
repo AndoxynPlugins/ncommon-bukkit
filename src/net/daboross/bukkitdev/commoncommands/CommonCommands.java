@@ -4,13 +4,10 @@ package net.daboross.bukkitdev.commoncommands;
  *
  * @author daboross
  */
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.PluginCommand;
-import org.bukkit.plugin.PluginManager;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -19,61 +16,34 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public final class CommonCommands extends JavaPlugin {
 
-    private static CommonCommands instance;
-
-    /**
-     *
-     */
     @Override
     public void onEnable() {
-        PvPClass pvpClass = new PvPClass();
-        PluginCommand cc = getCommand("cc");
-        PluginCommand setdabo = getCommand("setdabo");
-        PluginCommand unsetdabo = getCommand("unsetdabo");
-        SetDaboExecutor sde = new SetDaboExecutor();
-        PluginCommand pvp = getCommand("pvp");
-        if (cc != null) {
-            cc.setExecutor(new CommonCommandExecutor());
-        } else {
-            getLogger().severe("Command CC is null");
-        }
-        if (pvp != null) {
-            pvp.setExecutor(pvpClass);
-        } else {
-            getLogger().severe("Command PVP is null");
-        }
-        if (setdabo != null) {
-            setdabo.setExecutor(sde);
-        } else {
-            getLogger().severe("Command SETDABO is null");
-        }
-        if (unsetdabo != null) {
-            unsetdabo.setExecutor(sde);
-        } else {
-            getLogger().severe("Command UNSETDABO is null");
-        }
-        PluginManager pm = this.getServer().getPluginManager();
-        pm.registerEvents(pvpClass, this);
-        instance = this;
     }
 
     @Override
     public void onDisable() {
-        instance = null;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        getLogger().log(Level.INFO, "Tried to Run Command: {0}", cmd.getName());
-        return false;
-    }
-
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        return super.onTabComplete(sender, command, alias, args);
-    }
-
-    public static CommonCommands getCurrentInstance() {
-        return instance;
+        if (cmd.getName().equalsIgnoreCase("list")) {
+            Player[] onlinePlayers = Bukkit.getServer().getOnlinePlayers();
+            if (onlinePlayers.length == 0) {
+                sender.sendMessage(ColorList.MAIN + "There are no players online.");
+            } else if (onlinePlayers.length == 1) {
+                sender.sendMessage(ColorList.MAIN + "There is one player online:");
+                sender.sendMessage(ColorList.NAME + onlinePlayers[0].getDisplayName());
+            } else {
+                sender.sendMessage(ColorList.MAIN + "There are " + ColorList.NUMBER + onlinePlayers.length + ColorList.MAIN + " players online:");
+                StringBuilder messageBuilder = new StringBuilder(ColorList.NAME).append(onlinePlayers[0].getDisplayName());
+                for (int i = 1; i < onlinePlayers.length; i++) {
+                    messageBuilder.append(ColorList.DIVIDER).append(", ").append(ColorList.NAME).append(onlinePlayers[i].getDisplayName());
+                }
+                sender.sendMessage(messageBuilder.toString());
+            }
+        } else {
+            sender.sendMessage("Command unknown to CommonCommands?");
+        }
+        return true;
     }
 }

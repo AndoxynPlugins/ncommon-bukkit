@@ -4,43 +4,8 @@ version: 1.0
 author: Dabo Ross
 prefix: CC
 description: Common Commands For Newlanders!
-depend: [PermissionsEx]
 
 commands:
-   cc:
-      description: This is the CommonCommands Commands. Everything else is a sub command of this
-      usage: /<command> ?
-      aliases: [commonc, commoncommands, ccommands]
-   setdabo:
-   unsetdabo:
-     permission: commoncommands.unsetdabo
-   pvp:
-     description: This command puts you into the PvP world
-     usage: /<command>
-     aliases: [pvpme, pvpwarp]
-permissions:
-  commoncommands.*:
-    description: Gives access to all CommonCommands Commands
-    children:
-       commoncommands.help: true
-    default: false
-  commoncommands.help:
-    description: Allows you to use /cc 
-    default: true
-  commoncommands.getplayernamelist:
-    description: Allows you to use /cc 
-    default: true
-    children:
-      rankdata.help: true
-  commoncommands.curseme:
-    description: Allows you to use /cc 
-    default: true
-    children:
-      rankdata.help: true
-      rankdata.uncurseme: true
-  commoncommands.uncurseme:
-    description: Allows you to use /cc 
-    default: true
-    children:
-      rankdata.help: true
-      rankdata.curseme: true
+  list:
+    description: Gets a list of the currently online players
+    usage: /<command>
