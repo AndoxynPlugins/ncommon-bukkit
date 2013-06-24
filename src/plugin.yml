@@ -1,8 +1,7 @@
 name: CommonCommands
 main: net.daboross.bukkitdev.commoncommands.CommonCommands
-version: 1.0
+version: 1.1
 author: Dabo Ross
-prefix: CC
 description: Common Commands For Newlanders!
 
 commands:

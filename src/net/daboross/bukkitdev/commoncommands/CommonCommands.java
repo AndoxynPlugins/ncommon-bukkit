@@ -29,12 +29,12 @@ public final class CommonCommands extends JavaPlugin {
         if (cmd.getName().equalsIgnoreCase("list")) {
             Player[] onlinePlayers = Bukkit.getServer().getOnlinePlayers();
             if (onlinePlayers.length == 0) {
-                sender.sendMessage(ColorList.MAIN + "There are no players online.");
+                sender.sendMessage(ColorList.REG + "There are no players online.");
             } else if (onlinePlayers.length == 1) {
-                sender.sendMessage(ColorList.MAIN + "There is one player online:");
+                sender.sendMessage(ColorList.REG + "There is one player online:");
                 sender.sendMessage(ColorList.NAME + onlinePlayers[0].getDisplayName());
             } else {
-                sender.sendMessage(ColorList.MAIN + "There are " + ColorList.NUMBER + onlinePlayers.length + ColorList.MAIN + " players online:");
+                sender.sendMessage(ColorList.TOP + "There are " + ColorList.DATA + onlinePlayers.length + ColorList.TOP + " players online:");
                 StringBuilder messageBuilder = new StringBuilder(ColorList.NAME).append(onlinePlayers[0].getDisplayName());
                 for (int i = 1; i < onlinePlayers.length; i++) {
                     messageBuilder.append(ColorList.DIVIDER).append(", ").append(ColorList.NAME).append(onlinePlayers[i].getDisplayName());
@@ -42,7 +42,7 @@ public final class CommonCommands extends JavaPlugin {
                 sender.sendMessage(messageBuilder.toString());
             }
         } else {
-            sender.sendMessage("Command unknown to CommonCommands?");
+            sender.sendMessage("Command unknown to CommonCommands");
         }
         return true;
     }
