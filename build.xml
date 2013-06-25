@@ -74,7 +74,7 @@
     <target name="-post-jar">  
         <jar jarfile="${dist.jar}" update="true">  
             <zipfileset src="${dist.jar}" includes="**/*.class" />  
-           <!-- <zipfileset src="${reference.CommandExecutorBase.jar}" includes="**/*.class"/> -->  
+            <!-- <zipfileset src="${reference.CommandExecutorBase.jar}" includes="**/*.class"/> -->  
         </jar>   
     </target>
 </project>
