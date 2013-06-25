@@ -12,7 +12,7 @@ commands:
   commoncommands:whereami:
     description: Gets your current location and world
     usage: /<command>
-    aliases: [whereami, wmi, w]
+    aliases: [whereami, wai, w]
   commoncommands:whereis:
     description: Gets the location and world of a given player
     usage: /<command> <Player>
