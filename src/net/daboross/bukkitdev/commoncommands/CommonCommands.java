@@ -50,10 +50,10 @@ public final class CommonCommands extends JavaPlugin {
             }
             Player p = (Player) sender;
             Location loc = p.getLocation();
-            sender.sendMessage(ColorList.DATA + loc.getX() + ColorList.REG + ", "
-                    + ColorList.DATA + loc.getY() + ColorList.REG + ", "
-                    + ColorList.DATA + loc.getZ() + ColorList.REG + ", "
-                    + ColorList.DATA + loc.getWorld());
+            sender.sendMessage(ColorList.DATA + (int) loc.getX() + ColorList.REG + ", "
+                    + ColorList.DATA + (int) loc.getY() + ColorList.REG + ", "
+                    + ColorList.DATA + (int) loc.getZ() + ColorList.REG + ", "
+                    + ColorList.DATA + loc.getWorld().getName());
         } else if (cmd.getName().equalsIgnoreCase("commoncommands:whereis")) {
             if (args.length == 0) {
                 sender.sendMessage(ColorList.ERR + "Please specify a player");
@@ -63,7 +63,7 @@ public final class CommonCommands extends JavaPlugin {
             Player player = null;
             String lowerCaseArg = args[0].toLowerCase();
             for (Player p : Bukkit.getOnlinePlayers()) {
-                if (p.getName().toLowerCase().contains(lowerCaseArg) || ChatColor.stripColor(p.getDisplayName()).equalsIgnoreCase(lowerCaseArg)) {
+                if (p.getName().toLowerCase().contains(lowerCaseArg) || ChatColor.stripColor(p.getDisplayName()).toLowerCase().contains(lowerCaseArg)) {
                     player = p;
                     break;
                 }
@@ -74,10 +74,10 @@ public final class CommonCommands extends JavaPlugin {
                 return true;
             }
             Location loc = player.getLocation();
-            sender.sendMessage(ColorList.NAME + player.getName() + ColorList.NAME + "'s Location: " + ColorList.DATA + loc.getX() + ColorList.REG + ", "
-                    + ColorList.DATA + loc.getY() + ColorList.REG + ", "
-                    + ColorList.DATA + loc.getZ() + ColorList.REG + ", "
-                    + ColorList.DATA + loc.getWorld());
+            sender.sendMessage(ColorList.NAME + player.getName() + ColorList.NAME + "'s Location: " + ColorList.DATA + (int) loc.getX() + ColorList.REG + ", "
+                    + ColorList.DATA + (int) loc.getY() + ColorList.REG + ", "
+                    + ColorList.DATA + (int) loc.getZ() + ColorList.REG + ", "
+                    + ColorList.DATA + loc.getWorld().getName());
         } else {
             sender.sendMessage("Command unknown to CommonCommands: " + cmd.getName());
         }
