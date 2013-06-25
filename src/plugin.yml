@@ -5,6 +5,15 @@ author: Dabo Ross
 description: Common Commands For Newlanders!
 
 commands:
-  list:
+  commoncommands:list:
     description: Gets a list of the currently online players
     usage: /<command>
+    aliases: [list, who]
+  commoncommands:whereami:
+    description: Gets your current location and world
+    usage: /<command>
+    aliases: [whereami, wmi, w]
+  commoncommands:whereis:
+    description: Gets the location and world of a given player
+    usage: /<command> <Player>
+    aliases: [whereis, wi]
