@@ -2,6 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.daboross.bukkitdev.commoncommands</groupId>
     <artifactId>CommonCommands</artifactId>
+    <packaging>jar</packaging>
     <version>1.0</version>
     <name>CommonCommands</name>
     <repositories>
@@ -23,6 +24,9 @@
             </plugin>
         </plugins>
     </build>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.bukkit</groupId>
