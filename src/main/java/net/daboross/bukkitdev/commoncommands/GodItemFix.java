@@ -43,26 +43,32 @@ public class GodItemFix implements Listener {
     }
 
     public static void removeGodEnchants(Player p) {
+        String playerName = p.getName();
         for (ItemStack it : p.getInventory().getArmorContents()) {
-            removeGodEnchants(it, p);
+            if (removeGodEnchants(it, playerName)) {
+                p.sendMessage("Your " + it.getType().toString() + " has been fixed!");
+            }
         }
         for (ItemStack it : p.getInventory().getContents()) {
-            removeGodEnchants(it, p);
+            if (removeGodEnchants(it, playerName)) {
+                p.sendMessage("Your " + it.getType().toString() + " has been fixed!");
+            }
         }
     }
 
-    public static void removeGodEnchants(ItemStack it, Player p) {
+    public static boolean removeGodEnchants(ItemStack it, String playerName) {
         if (it != null && it.getEnchantments().size() > 0 && it.getType() != Material.AIR) {
+            boolean changed = false;
             for (Map.Entry<Enchantment, Integer> entry : it.getEnchantments().entrySet()) {
                 Enchantment e = entry.getKey();
-                if (entry.getValue() > e.getMaxLevel()) {
+                if (entry.getValue() > e.getMaxLevel() || !e.canEnchantItem(it)) {
                     String message;
                     if (e.canEnchantItem(it)) {
                         it.addEnchantment(e, e.getMaxLevel());
-                        message = String.format("Changed level of enchantment %s from %s to %s on item %s in inventory of %s", e.getName(), entry.getValue(), e.getMaxLevel(), it.getType().toString(), p.getName());
+                        message = String.format("Changed level of enchantment %s from %s to %s on item %s in inventory of %s", e.getName(), entry.getValue(), e.getMaxLevel(), it.getType().toString(), playerName);
                     } else {
                         it.removeEnchantment(e);
-                        message = String.format("Removed enchantment %s level %s on item %s in inventory of %s", e.getName(), entry.getValue(), it.getType().toString(), p.getName());
+                        message = String.format("Removed enchantment %s level %s on item %s in inventory of %s", e.getName(), entry.getValue(), it.getType().toString(), playerName);
                     }
                     try {
                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mail send daboross " + message);
@@ -70,9 +76,12 @@ public class GodItemFix implements Listener {
                         Bukkit.getLogger().log(Level.INFO, "[GodItemFix] Command Error.", ce);
                     }
                     Bukkit.getLogger().log(Level.INFO, "[GodItemFix] {0}", message);
+                    changed = true;
                 }
             }
+            return changed;
         }
+        return false;
     }
 
     private static class GodItemFixRunnable implements Runnable {
