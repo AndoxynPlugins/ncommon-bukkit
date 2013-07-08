@@ -1,9 +1,8 @@
 name: CommonCommands
 main: net.daboross.bukkitdev.commoncommands.CommonCommands
-version: 1.1
+version: 2.0
 author: Dabo Ross
 description: Common Commands For Newlanders!
-
 commands:
   list:
     description: Gets a list of the currently online players
