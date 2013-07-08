@@ -47,7 +47,7 @@ public final class CommonCommands extends JavaPlugin {
                 }
                 sender.sendMessage(messageBuilder.toString());
             }
-        } else if (cmd.getName().equalsIgnoreCase("wi")) {
+        } else if (cmd.getName().equalsIgnoreCase("w")) {
             if (!(sender instanceof Player)) {
                 sender.sendMessage(ColorList.ERR + "Must be run by a player");
                 return true;
@@ -58,7 +58,7 @@ public final class CommonCommands extends JavaPlugin {
                     + ColorList.DATA + (int) loc.getY() + ColorList.REG + ", "
                     + ColorList.DATA + (int) loc.getZ() + ColorList.REG + ", "
                     + ColorList.DATA + loc.getWorld().getName());
-        } else if (cmd.getName().equalsIgnoreCase("w")) {
+        } else if (cmd.getName().equalsIgnoreCase("wi")) {
             if (args.length == 0) {
                 sender.sendMessage(ColorList.ERR + "Please specify a player");
                 sender.sendMessage(ColorList.REG + "Usage: " + ColorList.CMD + "/" + label + ColorList.ARGS_SURROUNDER + " <" + ColorList.ARGS + "Player" + ColorList.ARGS_SURROUNDER + ">");
