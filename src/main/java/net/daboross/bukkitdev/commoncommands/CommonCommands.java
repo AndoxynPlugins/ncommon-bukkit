@@ -20,6 +20,10 @@ public final class CommonCommands extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        getServer().getPluginManager().registerEvents(new GodItemFix(this), this);
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            GodItemFix.removeGodEnchants(p);
+        }
     }
 
     @Override
@@ -28,7 +32,7 @@ public final class CommonCommands extends JavaPlugin {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("commoncommands:list")) {
+        if (cmd.getName().equalsIgnoreCase("list")) {
             Player[] onlinePlayers = Bukkit.getServer().getOnlinePlayers();
             if (onlinePlayers.length == 0) {
                 sender.sendMessage(ColorList.REG + "There are no players online.");
@@ -43,7 +47,7 @@ public final class CommonCommands extends JavaPlugin {
                 }
                 sender.sendMessage(messageBuilder.toString());
             }
-        } else if (cmd.getName().equalsIgnoreCase("commoncommands:whereami")) {
+        } else if (cmd.getName().equalsIgnoreCase("wi")) {
             if (!(sender instanceof Player)) {
                 sender.sendMessage(ColorList.ERR + "Must be run by a player");
                 return true;
@@ -54,7 +58,7 @@ public final class CommonCommands extends JavaPlugin {
                     + ColorList.DATA + (int) loc.getY() + ColorList.REG + ", "
                     + ColorList.DATA + (int) loc.getZ() + ColorList.REG + ", "
                     + ColorList.DATA + loc.getWorld().getName());
-        } else if (cmd.getName().equalsIgnoreCase("commoncommands:whereis")) {
+        } else if (cmd.getName().equalsIgnoreCase("w")) {
             if (args.length == 0) {
                 sender.sendMessage(ColorList.ERR + "Please specify a player");
                 sender.sendMessage(ColorList.REG + "Usage: " + ColorList.CMD + "/" + label + ColorList.ARGS_SURROUNDER + " <" + ColorList.ARGS + "Player" + ColorList.ARGS_SURROUNDER + ">");
