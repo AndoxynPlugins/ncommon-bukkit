@@ -1,4 +1,4 @@
 CommonCommands
 ==============
 
-CommonCommands Bukkit Plugin
+CommonCommands Bukkit plugin
