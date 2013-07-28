@@ -1,6 +1,6 @@
-name: CommonCommands
+name: ${project.name}
 main: net.daboross.bukkitdev.commoncommands.CommonCommands
-version: 2.0
+version: ${project.version}
 author: Dabo Ross
 description: Common Commands For Newlanders!
 commands:

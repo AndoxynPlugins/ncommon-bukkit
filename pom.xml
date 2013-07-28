@@ -3,7 +3,7 @@
     <groupId>net.daboross.bukkitdev.commoncommands</groupId>
     <artifactId>CommonCommands</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
+    <version>2.0.0</version>
     <name>CommonCommands</name>
     <repositories>
         <repository>
@@ -12,7 +12,16 @@
         </repository>
     </repositories>
     <build>
-        <finalName>CommonCommands</finalName>
+        <finalName>${project.name}</finalName>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <includes>
+                    <include>**</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -32,7 +41,7 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.5.2-R1.1-SNAPSHOT</version>
+            <version>1.6.2-R0.1-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
