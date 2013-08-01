@@ -20,6 +20,8 @@ package net.daboross.bukkitdev.commoncommands;
  *
  * @author daboross
  */
+import java.io.IOException;
+import java.util.logging.Level;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -27,6 +29,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcstats.MetricsLite;
 
 /**
  *
@@ -39,6 +42,15 @@ public final class CommonCommands extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new GodItemFix(this), this);
         for (Player p : Bukkit.getOnlinePlayers()) {
             GodItemFix.removeGodEnchants(p);
+        }
+        MetricsLite metrics = null;
+        try {
+            metrics = new MetricsLite(this);
+        } catch (IOException ex) {
+            getLogger().log(Level.WARNING, "Unable to create Metrics", ex);
+        }
+        if (metrics != null) {
+            metrics.start();
         }
     }
 
