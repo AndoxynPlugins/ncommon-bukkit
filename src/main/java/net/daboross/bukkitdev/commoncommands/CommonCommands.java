@@ -23,6 +23,7 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.MetricsLite;
 
@@ -34,7 +35,9 @@ public final class CommonCommands extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getServer().getPluginManager().registerEvents(new GodItemFix(this), this);
+        PluginManager pm = getServer().getPluginManager();
+        pm.registerEvents(new GodItemFix(this), this);
+        pm.registerEvents(new PlayerListener(this), this);
         for (Player p : Bukkit.getOnlinePlayers()) {
             GodItemFix.removeGodEnchants(p);
         }
