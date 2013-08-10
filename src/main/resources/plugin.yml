@@ -4,10 +4,6 @@ version: ${project.version}
 author: Dabo Ross
 description: Common Commands For Newlanders!
 commands:
-  list:
-    description: Gets a list of the currently online players
-    usage: /<command>
-    aliases: [who]
   w:
     description: Gets your current location and world
     usage: /<command>
