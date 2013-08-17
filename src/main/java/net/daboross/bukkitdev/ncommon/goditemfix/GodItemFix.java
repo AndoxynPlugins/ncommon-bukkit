@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.commoncommands;
+package net.daboross.bukkitdev.ncommon.goditemfix;
 
 import java.util.Map;
 import java.util.logging.Level;
@@ -26,6 +26,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryCreativeEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
@@ -33,7 +34,7 @@ import org.bukkit.plugin.Plugin;
 
 /**
  *
- * @author daboross (based off of MasterGabeMod's work)
+ * @author daboross
  */
 public class GodItemFix implements Listener {
 
@@ -50,10 +51,15 @@ public class GodItemFix implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onWorldChange(PlayerChangedWorldEvent evt) {
-        Bukkit.getScheduler().runTaskLater(plugin, new GodItemFixRunnable(evt.getPlayer()), 20);
+        Bukkit.getScheduler().runTaskLater(plugin, new GodItemFixRunnable(this, evt.getPlayer()), 20);
     }
 
-    public static void removeGodEnchants(Player p) {
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void onInventoryCreative(InventoryCreativeEvent evt) {
+        removeGodEnchants(evt.getCurrentItem(), evt.getWhoClicked().getName());
+    }
+
+    public void removeGodEnchants(Player p) {
         String playerName = p.getName();
         for (ItemStack it : p.getInventory().getArmorContents()) {
             if (removeGodEnchants(it, playerName)) {
@@ -67,7 +73,7 @@ public class GodItemFix implements Listener {
         }
     }
 
-    public static boolean removeGodEnchants(ItemStack it, String playerName) {
+    public boolean removeGodEnchants(ItemStack it, String playerName) {
         if (it != null && it.getEnchantments().size() > 0 && it.getType() != Material.AIR) {
             boolean changed = false;
             for (Map.Entry<Enchantment, Integer> entry : it.getEnchantments().entrySet()) {
@@ -76,36 +82,22 @@ public class GodItemFix implements Listener {
                     String message;
                     if (e.canEnchantItem(it)) {
                         it.addEnchantment(e, e.getMaxLevel());
-                        message = String.format("Changed level of enchantment %s from %s to %s on item %s in inventory of %s", e.getName(), entry.getValue(), e.getMaxLevel(), it.getType().toString(), playerName);
+                        message = String.format("Changed level of enchantment %s from %s to %s on item %s in inventory of %s", e.getName(), entry.getValue(), e.getMaxLevel(), it.getType(), playerName);
                     } else {
                         it.removeEnchantment(e);
-                        message = String.format("Removed enchantment %s level %s on item %s in inventory of %s", e.getName(), entry.getValue(), it.getType().toString(), playerName);
+                        message = String.format("Removed enchantment %s level %s on item %s in inventory of %s", e.getName(), entry.getValue(), it.getType(), playerName);
                     }
                     try {
                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mail send daboross " + message);
                     } catch (CommandException ce) {
-                        Bukkit.getLogger().log(Level.INFO, "[GodItemFix] Command Error.", ce);
+                        plugin.getLogger().log(Level.INFO, "Command error", ce);
                     }
-                    Bukkit.getLogger().log(Level.INFO, "[GodItemFix] {0}", message);
+                    plugin.getLogger().log(Level.INFO, message);
                     changed = true;
                 }
             }
             return changed;
         }
         return false;
-    }
-
-    private static class GodItemFixRunnable implements Runnable {
-
-        private final Player p;
-
-        private GodItemFixRunnable(Player p) {
-            this.p = p;
-        }
-
-        @Override
-        public void run() {
-            removeGodEnchants(p);
-        }
     }
 }

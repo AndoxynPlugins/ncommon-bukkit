@@ -1,8 +1,8 @@
 name: ${project.name}
-main: net.daboross.bukkitdev.commoncommands.CommonCommands
+main: net.daboross.bukkitdev.ncommon.NCommonPlugin
 version: ${project.version}
 author: Dabo Ross
-description: Common Commands For Newlanders!
+description: ${project.description}
 commands:
   w:
     description: Gets your current location and world

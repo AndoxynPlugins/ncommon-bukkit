@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2013 Dabo Ross <www.daboross.net>
  */
-package net.daboross.bukkitdev.commoncommands;
+package net.daboross.bukkitdev.ncommon;
 
 import java.util.logging.Level;
 import org.bukkit.Bukkit;
@@ -15,23 +15,17 @@ import org.bukkit.event.player.PlayerQuitEvent;
  *
  * @author daboross
  */
-public class PlayerListener implements Listener {
-
-    private final CommonCommands plugin;
-
-    public PlayerListener(CommonCommands plugin) {
-        this.plugin = plugin;
-    }
+public class JoinMessageListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent evt) {
         evt.setJoinMessage(null);
-        Bukkit.getServer().getLogger().log(Level.INFO, ChatColor.YELLOW + "{0} joined this server.", evt.getPlayer().getName());
+        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + evt.getPlayer().getName() + " joined this server.");
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent evt) {
         evt.setQuitMessage(null);
-        Bukkit.getServer().getLogger().log(Level.INFO, ChatColor.YELLOW + "{0} left this server.", evt.getPlayer().getName());
+        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + evt.getPlayer().getName() + " left this server.");
     }
 }
