@@ -96,7 +96,7 @@
                             <relocations>
                                 <relocation>
                                     <pattern>net.daboross.bukkitdev.commandexecutorbase</pattern>
-                                    <shadedPattern>net.daboross.bukkitdev.ncommon.commandexecutorbase</shadedPattern>
+                                    <shadedPattern>net.daboross.bukkitdev.ncommon.libraries.commandexecutorbase</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>
