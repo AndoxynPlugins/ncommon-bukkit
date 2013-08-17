@@ -5,10 +5,6 @@ author: Dabo Ross
 description: ${project.description}
 commands:
   w:
-    description: Gets your current location and world
-    usage: /<command>
     aliases: [whereami, wai]
   wi:
-    description: Gets the location and world of a given player
-    usage: /<command> <Player>
     aliases: [whereis]
