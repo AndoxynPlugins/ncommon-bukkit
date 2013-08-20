@@ -16,11 +16,11 @@
  */
 package net.daboross.bukkitdev.ncommon;
 
+import net.daboross.bukkitdev.ncommon.commands.WhereCommand;
+import net.daboross.bukkitdev.ncommon.commands.WhereIsCommand;
 import net.daboross.bukkitdev.ncommon.goditemfix.GodItemFix;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -30,11 +30,15 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public final class NCommonPlugin extends JavaPlugin {
 
+    private final MessageFormats formats = MessageFormats.DEFAULT;
+
     @Override
     public void onEnable() {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new GodItemFix(this), this);
-        pm.registerEvents(new JoinMessageListener(), this);
+        pm.registerEvents(new JoinMessageListener(this), this);
+        new WhereIsCommand(this).registerIfExists(getCommand("wi"));
+        new WhereCommand(this).registerIfExists(getCommand("w"));
     }
 
     @Override
@@ -47,10 +51,7 @@ public final class NCommonPlugin extends JavaPlugin {
         return true;
     }
 
-    private void registerIfExists(String command, CommandExecutor executor) {
-        PluginCommand cmd = getCommand(command);
-        if (cmd != null) {
-            cmd.setExecutor(executor);
-        }
+    public MessageFormats getFormats() {
+        return formats;
     }
 }

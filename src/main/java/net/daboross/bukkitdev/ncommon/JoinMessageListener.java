@@ -17,7 +17,6 @@
 package net.daboross.bukkitdev.ncommon;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -29,15 +28,21 @@ import org.bukkit.event.player.PlayerQuitEvent;
  */
 public class JoinMessageListener implements Listener {
 
+    private final NCommonPlugin plugin;
+
+    public JoinMessageListener(NCommonPlugin plugin) {
+        this.plugin = plugin;
+    }
+
     @EventHandler
     public void onJoin(PlayerJoinEvent evt) {
         evt.setJoinMessage(null);
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + evt.getPlayer().getName() + " joined this server.");
+        Bukkit.getConsoleSender().sendMessage(String.format(plugin.getFormats().joinConsoleFormat, evt.getPlayer().getName()));
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent evt) {
         evt.setQuitMessage(null);
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + evt.getPlayer().getName() + " left this server.");
+        Bukkit.getConsoleSender().sendMessage(String.format(plugin.getFormats().leaveConsoleFormat, evt.getPlayer().getName()));
     }
 }

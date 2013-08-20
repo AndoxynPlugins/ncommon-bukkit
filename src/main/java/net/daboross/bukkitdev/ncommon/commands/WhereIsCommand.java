@@ -48,7 +48,7 @@ public class WhereIsCommand extends NCommand {
             return false;
         }
         Location loc = player.getLocation();
-        sender.sendMessage(String.format("", player.getName(), loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), loc.getWorld().getName()));
+        sender.sendMessage(String.format(plugin.getFormats().whereIsCommandFormat, player.getName(), loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), loc.getWorld().getName()));
         return true;
     }
 

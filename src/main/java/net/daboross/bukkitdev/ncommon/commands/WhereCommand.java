@@ -45,7 +45,7 @@ public class WhereCommand extends NCommand {
         }
         Player p = (Player) sender;
         Location loc = p.getLocation();
-        sender.sendMessage(String.format("", args[0], loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), loc.getWorld().getName()));
+        sender.sendMessage(String.format(plugin.getFormats().whereCommandFormat, args[0], loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), loc.getWorld().getName()));
         return true;
     }
 
