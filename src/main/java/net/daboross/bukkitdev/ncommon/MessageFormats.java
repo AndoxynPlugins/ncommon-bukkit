@@ -17,6 +17,7 @@
 package net.daboross.bukkitdev.ncommon;
 
 import net.daboross.bukkitdev.commandexecutorbase.ColorList;
+import org.bukkit.ChatColor;
 
 /**
  *
@@ -27,8 +28,8 @@ public class MessageFormats {
     public static final MessageFormats DEFAULT = new MessageFormats(
             "%s" + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s",
             ColorList.NAME + "%s" + ColorList.REG + ": " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s",
-            "joinConsole",
-            "leaveConsole");
+            ChatColor.BLUE + "%s" + ChatColor.YELLOW + " joined this server.",
+            ChatColor.BLUE + "%s" + ChatColor.YELLOW + " left this server.");
     /**
      * First parameter is server name, Second parameter is X, Third parameter is
      * Y, Fourth parameter is Z, Fifth parameter is world.
