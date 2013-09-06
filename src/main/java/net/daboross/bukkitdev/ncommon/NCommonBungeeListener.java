@@ -48,46 +48,45 @@ public class NCommonBungeeListener implements PluginMessageListener {
         if (!channel.equalsIgnoreCase("NCommon")) {
             return;
         }
-        DataInputStream in = new DataInputStream(new ByteArrayInputStream(message));
-        try {
-            String action = in.readUTF();
-            switch (action) {
-                case "SetDisplayName":
-                    player.setDisplayName(in.readUTF());
-                    break;
-                case "ConsoleMessage":
-                    Bukkit.getConsoleSender().sendMessage(in.readUTF());
-                    break;
-                case "SendWithPermission":
-                    String permission = in.readUTF();
-                    String spyMessage = in.readUTF();
-                    int ignoredLength = 0;
-                    try {
-                        ignoredLength = in.readInt();
-                    } catch (IOException ex) {
-                    }
-                    if (ignoredLength != 0) {
-                        Set<String> ignored = new HashSet<String>(ignoredLength);
-                        for (int i = 0; i < ignoredLength; i++) {
-                            ignored.add(in.readUTF());
+        try (ByteArrayInputStream bais = new ByteArrayInputStream(message)) {
+            try (DataInputStream in = new DataInputStream(bais)) {
+                String action = in.readUTF();
+                switch (action) {
+                    case "SetDisplayName":
+                        player.setDisplayName(in.readUTF());
+                        break;
+                    case "ConsoleMessage":
+                        Bukkit.getConsoleSender().sendMessage(in.readUTF());
+                        break;
+                    case "SendWithPermission":
+                        String permission = in.readUTF();
+                        String spyMessage = in.readUTF();
+                        int ignoredLength = 0;
+                        try {
+                            ignoredLength = in.readInt();
+                        } catch (IOException ex) {
                         }
-                        for (Player p : Bukkit.getOnlinePlayers()) {
-                            if (p.hasPermission(permission) && !ignored.contains(p.getName())) {
-                                p.sendMessage(spyMessage);
+                        if (ignoredLength != 0) {
+                            Set<String> ignored = new HashSet<String>(ignoredLength);
+                            for (int i = 0; i < ignoredLength; i++) {
+                                ignored.add(in.readUTF());
+                            }
+                            for (Player p : Bukkit.getOnlinePlayers()) {
+                                if (p.hasPermission(permission) && !ignored.contains(p.getName())) {
+                                    p.sendMessage(spyMessage);
+                                }
+                            }
+                        } else {
+                            for (Player p : Bukkit.getOnlinePlayers()) {
+                                if (p.hasPermission(permission)) {
+                                    p.sendMessage(spyMessage);
+                                }
                             }
                         }
-                    } else {
-                        for (Player p : Bukkit.getOnlinePlayers()) {
-                            if (p.hasPermission(permission)) {
-                                p.sendMessage(spyMessage);
-                            }
-                        }
-                    }
-                    break;
-
-
-                default:
-                    plugin.getLogger().log(Level.WARNING, "Unknown command received ''{0}''.", action);
+                        break;
+                    default:
+                        plugin.getLogger().log(Level.WARNING, "Unknown command received ''{0}''.", action);
+                }
             }
         } catch (IOException ex) {
             plugin.getLogger().log(Level.SEVERE, "Error recieving message", ex);
