@@ -16,7 +16,8 @@
  */
 package net.daboross.bukkitdev.ncommon;
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import net.daboross.bukkitdev.commandexecutorbase.ColorList;
 import org.bukkit.ChatColor;
 
@@ -24,7 +25,8 @@ import org.bukkit.ChatColor;
  *
  * @author daboross
  */
-@Data
+@EqualsAndHashCode
+@ToString
 public class MessageFormats {
 
     public static final MessageFormats DEFAULT;
@@ -54,4 +56,11 @@ public class MessageFormats {
      * First parameter is player name.
      */
     public final String leaveConsoleFormat;
+
+    public MessageFormats(String whereCommandFormat, String whereIsCommandFormat, String joinConsoleFormat, String leaveConsoleFormat) {
+        this.whereCommandFormat = whereCommandFormat;
+        this.whereIsCommandFormat = whereIsCommandFormat;
+        this.joinConsoleFormat = joinConsoleFormat;
+        this.leaveConsoleFormat = leaveConsoleFormat;
+    }
 }
