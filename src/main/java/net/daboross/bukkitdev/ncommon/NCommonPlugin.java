@@ -16,12 +16,16 @@
  */
 package net.daboross.bukkitdev.ncommon;
 
+import java.util.logging.Level;
 import net.daboross.bukkitdev.ncommon.commands.WhereCommand;
 import net.daboross.bukkitdev.ncommon.commands.WhereIsCommand;
-import net.daboross.bukkitdev.ncommon.goditemfix.GodItemFix;
+import net.daboross.bukkitdev.ncommon.rankdisplay.RankCommand;
+import net.daboross.bukkitdev.ncommon.removegoditems.RemoveGodItemsListener;
+import net.milkbowl.vault.permission.Permission;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -31,15 +35,18 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class NCommonPlugin extends JavaPlugin {
 
     private final MessageFormats formats = MessageFormats.DEFAULT;
+    private Permission permission;
 
     @Override
     public void onEnable() {
         PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(new GodItemFix(this), this);
-        pm.registerEvents(new JoinMessageListener(this), this);
+        pm.registerEvents(new RemoveGodItemsListener(this), this);
+        pm.registerEvents(new JoinListener(), this);
         new NCommonBungeeListener(this).register();
         new WhereIsCommand(this).registerIfExists(getCommand("wi"));
         new WhereCommand(this).registerIfExists(getCommand("w"));
+        getPermission();
+        new RankCommand(permission).setup(this);
     }
 
     @Override
@@ -50,6 +57,14 @@ public final class NCommonPlugin extends JavaPlugin {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         sender.sendMessage("Command unknown to NCommon: " + cmd.getName());
         return true;
+    }
+
+    private void getPermission() {
+        RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
+        permission = rsp.getProvider();
+        if (permission == null) {
+            getLogger().log(Level.SEVERE, "Permissions not found");
+        }
     }
 
     public MessageFormats getFormats() {

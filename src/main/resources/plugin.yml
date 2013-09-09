@@ -5,6 +5,19 @@ author: Dabo Ross
 description: ${project.description}
 commands:
   w:
+    description: Shows you your current position
+    usage: /<command>
     aliases: [whereami, wai]
   wi:
+    description: Shows you where another player is
+    usage: /<command> username
     aliases: [whereis]
+  rank:
+    description: Views your rank or the rank of another player
+    usage: /<command> [username]
+  list:
+    description: Lists all online players
+    usage: /<command>
+  ls:
+    description: Lists all online players along with what server they are on and their username
+    usage: /<command>

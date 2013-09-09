@@ -14,26 +14,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.ncommon.goditemfix;
+package net.daboross.bukkitdev.ncommon;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 /**
  *
  * @author daboross
  */
-public class GodItemFixRunnable implements Runnable {
+public class JoinListener implements Listener {
 
-    private final GodItemFix godItemFix;
-    private final Player p;
-
-    public GodItemFixRunnable(GodItemFix godItemFix, Player p) {
-        this.godItemFix = godItemFix;
-        this.p = p;
+    @EventHandler
+    public void onJoin(PlayerJoinEvent evt) {
+        Player p = evt.getPlayer();
+        if (!p.hasPlayedBefore()) {
+            p.chat("/spawn");
+        }
+        evt.setJoinMessage(null);
     }
 
-    @Override
-    public void run() {
-        godItemFix.removeGodEnchants(p);
+    @EventHandler
+    public void onQuit(PlayerQuitEvent evt) {
+        evt.setQuitMessage(null);
     }
 }
