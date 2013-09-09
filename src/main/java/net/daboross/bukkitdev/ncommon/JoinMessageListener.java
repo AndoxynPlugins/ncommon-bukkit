@@ -37,12 +37,10 @@ public class JoinMessageListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent evt) {
         evt.setJoinMessage(null);
-        Bukkit.getConsoleSender().sendMessage(String.format(plugin.getFormats().joinConsoleFormat, evt.getPlayer().getName()));
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent evt) {
         evt.setQuitMessage(null);
-        Bukkit.getConsoleSender().sendMessage(String.format(plugin.getFormats().leaveConsoleFormat, evt.getPlayer().getName()));
     }
 }

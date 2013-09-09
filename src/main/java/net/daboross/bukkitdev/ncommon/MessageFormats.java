@@ -16,17 +16,12 @@
  */
 package net.daboross.bukkitdev.ncommon;
 
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import net.daboross.bukkitdev.commandexecutorbase.ColorList;
-import org.bukkit.ChatColor;
 
 /**
  *
  * @author daboross
  */
-@EqualsAndHashCode
-@ToString
 public class MessageFormats {
 
     public static final MessageFormats DEFAULT;
@@ -34,9 +29,7 @@ public class MessageFormats {
     static {
         DEFAULT = new MessageFormats(
                 "%s" + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s",
-                ColorList.NAME + "%s" + ColorList.REG + ": " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s",
-                ChatColor.BLUE + "%s" + ChatColor.YELLOW + " joined",
-                ChatColor.BLUE + "%s" + ChatColor.YELLOW + " left");
+                ColorList.NAME + "%s" + ColorList.REG + ": " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s");
     }
     /**
      * First parameter is server name, Second parameter is X, Third parameter is
@@ -48,19 +41,9 @@ public class MessageFormats {
      * Y, Fourth parameter is Z, Fifth parameter is world.
      */
     public final String whereIsCommandFormat;
-    /**
-     * First parameter is player name.
-     */
-    public final String joinConsoleFormat;
-    /**
-     * First parameter is player name.
-     */
-    public final String leaveConsoleFormat;
 
-    public MessageFormats(String whereCommandFormat, String whereIsCommandFormat, String joinConsoleFormat, String leaveConsoleFormat) {
+    public MessageFormats(String whereCommandFormat, String whereIsCommandFormat) {
         this.whereCommandFormat = whereCommandFormat;
         this.whereIsCommandFormat = whereIsCommandFormat;
-        this.joinConsoleFormat = joinConsoleFormat;
-        this.leaveConsoleFormat = leaveConsoleFormat;
     }
 }
