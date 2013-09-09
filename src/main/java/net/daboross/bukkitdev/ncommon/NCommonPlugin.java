@@ -37,6 +37,7 @@ public final class NCommonPlugin extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new GodItemFix(this), this);
         pm.registerEvents(new JoinMessageListener(this), this);
+        new NCommonBungeeListener(this).register();
         new WhereIsCommand(this).registerIfExists(getCommand("wi"));
         new WhereCommand(this).registerIfExists(getCommand("w"));
     }
