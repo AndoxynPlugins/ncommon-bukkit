@@ -61,9 +61,4 @@ public class RemoveGodItemsListener implements Listener {
     public void onPickup(PlayerPickupItemEvent evt) {
         checker.removeGodEnchants(evt.getItem().getItemStack(), evt.getPlayer());
     }
-
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onInventoryMove(InventoryDragEvent evt) {
-        checker.removeGodEnchantsNextTick(evt.getWhoClicked(), evt.getInventorySlots());
-    }
 }
