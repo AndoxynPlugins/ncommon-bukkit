@@ -31,6 +31,9 @@ public class JoinListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent evt) {
         Player p = evt.getPlayer();
+        if (!p.hasPermission("ncommon.staff")) {
+            p.kickPlayer("Newlanders is currently only open to staff.");
+        }
         if (!p.hasPlayedBefore()) {
             p.chat("/spawn");
         }
