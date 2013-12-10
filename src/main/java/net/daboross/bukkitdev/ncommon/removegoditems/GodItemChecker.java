@@ -78,6 +78,9 @@ public class GodItemChecker {
 
     public void checkOverstack(ItemStack itemStack, Inventory inventory, Location location, String name) {
         int maxAmount = itemStack.getType().getMaxStackSize();
+        if (maxAmount < 1) {
+            maxAmount = 1;
+        }
         int amount = itemStack.getAmount();
         if (amount > maxAmount) {
             int numStacks = amount / maxAmount;
