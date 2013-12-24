@@ -25,10 +25,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
 
-/**
- *
- * @author daboross
- */
 public abstract class NCommand implements CommandExecutor, TabCompleter {
 
     protected final NCommonPlugin plugin;

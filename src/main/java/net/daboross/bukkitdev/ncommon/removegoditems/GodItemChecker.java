@@ -28,10 +28,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
-/**
- *
- * @author daboross
- */
 public class GodItemChecker {
 
     private final Plugin plugin;

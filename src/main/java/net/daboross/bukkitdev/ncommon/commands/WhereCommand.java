@@ -23,10 +23,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-/**
- *
- * @author daboross
- */
 public class WhereCommand extends NCommand {
 
     public WhereCommand(NCommonPlugin plugin) {

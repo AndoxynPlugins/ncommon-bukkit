@@ -18,10 +18,6 @@ package net.daboross.bukkitdev.ncommon;
 
 import net.daboross.bukkitdev.commandexecutorbase.ColorList;
 
-/**
- *
- * @author daboross
- */
 public class MessageFormats {
 
     public static final MessageFormats DEFAULT;
@@ -31,6 +27,7 @@ public class MessageFormats {
                 "%s" + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s",
                 ColorList.NAME + "%s" + ColorList.REG + ": " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s");
     }
+
     /**
      * First parameter is server name, Second parameter is X, Third parameter is
      * Y, Fourth parameter is Z, Fifth parameter is world.

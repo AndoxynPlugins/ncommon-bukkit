@@ -24,10 +24,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-/**
- *
- * @author daboross
- */
 public class WhereIsCommand extends NCommand {
 
     public static final String USAGE = ColorList.REG + "Usage: " + ColorList.CMD + "/<command>" + ColorList.ARGS_SURROUNDER + " <" + ColorList.ARGS + "Player" + ColorList.ARGS_SURROUNDER + ">";

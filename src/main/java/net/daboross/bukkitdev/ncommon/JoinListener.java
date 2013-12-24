@@ -22,10 +22,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-/**
- *
- * @author daboross
- */
 public class JoinListener implements Listener {
 
     @EventHandler()

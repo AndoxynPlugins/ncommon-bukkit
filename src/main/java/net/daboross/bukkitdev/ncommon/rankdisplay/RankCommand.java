@@ -28,7 +28,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- *
  * @author Dabo Ross <http://www.daboross.net/>
  */
 public class RankCommand implements CommandExecutor {

@@ -28,10 +28,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/**
- *
- * @author daboross
- */
 public final class NCommonPlugin extends JavaPlugin {
 
     private final MessageFormats formats = MessageFormats.DEFAULT;

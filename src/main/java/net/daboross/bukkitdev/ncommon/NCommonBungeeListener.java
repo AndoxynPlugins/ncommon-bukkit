@@ -29,9 +29,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
-/**
- * @author daboross
- */
 public class NCommonBungeeListener implements PluginMessageListener {
 
     private final JavaPlugin plugin;
