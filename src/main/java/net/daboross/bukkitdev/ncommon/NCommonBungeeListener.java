@@ -88,7 +88,6 @@ public class NCommonBungeeListener implements PluginMessageListener {
                         String key = in.readUTF();
                         permissionCheck(player, runPermission, key);
                         break;
-
                     default:
                         plugin.getLogger().log(Level.WARNING, "Unknown command received ''{0}''.", action);
                 }
@@ -103,7 +102,7 @@ public class NCommonBungeeListener implements PluginMessageListener {
         try {
             ByteArrayOutputStream b = new ByteArrayOutputStream();
             try (DataOutputStream out = new DataOutputStream(b)) {
-                out.writeUTF("PermissionCheck");
+                out.writeUTF("PermissionResult");
                 out.writeUTF(key);
                 out.writeBoolean(player.hasPermission(permission));
             }
