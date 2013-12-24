@@ -17,7 +17,9 @@
 package net.daboross.bukkitdev.ncommon;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,7 +30,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
 /**
- *
  * @author daboross
  */
 public class NCommonBungeeListener implements PluginMessageListener {
@@ -41,6 +42,7 @@ public class NCommonBungeeListener implements PluginMessageListener {
 
     public void register() {
         plugin.getServer().getMessenger().registerIncomingPluginChannel(plugin, "NCommon", this);
+        plugin.getServer().getMessenger().registerOutgoingPluginChannel(plugin, "NCommon");
     }
 
     @Override
@@ -67,7 +69,7 @@ public class NCommonBungeeListener implements PluginMessageListener {
                         } catch (IOException ex) {
                         }
                         if (ignoredLength != 0) {
-                            Set<String> ignored = new HashSet<String>(ignoredLength);
+                            Set<String> ignored = new HashSet<>(ignoredLength);
                             for (int i = 0; i < ignoredLength; i++) {
                                 ignored.add(in.readUTF());
                             }
@@ -84,6 +86,12 @@ public class NCommonBungeeListener implements PluginMessageListener {
                             }
                         }
                         break;
+                    case "PermissionCheck":
+                        String runPermission = in.readUTF();
+                        String key = in.readUTF();
+                        permissionCheck(player, runPermission, key);
+                        break;
+
                     default:
                         plugin.getLogger().log(Level.WARNING, "Unknown command received ''{0}''.", action);
                 }
@@ -91,5 +99,22 @@ public class NCommonBungeeListener implements PluginMessageListener {
         } catch (IOException ex) {
             plugin.getLogger().log(Level.SEVERE, "Error recieving message", ex);
         }
+    }
+
+    private void permissionCheck(Player player, String permission, String key) {
+        byte[] data;
+        try {
+            ByteArrayOutputStream b = new ByteArrayOutputStream();
+            try (DataOutputStream out = new DataOutputStream(b)) {
+                out.writeUTF("PermissionCheck");
+                out.writeUTF(key);
+                out.writeBoolean(player.hasPermission(permission));
+            }
+            data = b.toByteArray();
+        } catch (IOException ex) {
+            plugin.getLogger().log(Level.SEVERE, "Error writing data to byte array", ex);
+            return;
+        }
+        player.sendPluginMessage(plugin, "NCommon", data);
     }
 }
