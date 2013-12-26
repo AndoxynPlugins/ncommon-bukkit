@@ -17,6 +17,7 @@
 package net.daboross.bukkitdev.ncommon.commands;
 
 import net.daboross.bukkitdev.commandexecutorbase.ColorList;
+import net.daboross.bukkitdev.ncommon.Messages;
 import net.daboross.bukkitdev.ncommon.NCommonPlugin;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -41,7 +42,7 @@ public class WhereCommand extends NCommand {
         }
         Player p = (Player) sender;
         Location loc = p.getLocation();
-        sender.sendMessage(String.format(plugin.getFormats().whereCommandFormat, args[0], loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), loc.getWorld().getName()));
+        sender.sendMessage(String.format(Messages.WHERE_CMD, args[0], loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), loc.getWorld().getName()));
         return true;
     }
 

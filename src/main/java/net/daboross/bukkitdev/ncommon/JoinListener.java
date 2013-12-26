@@ -24,7 +24,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class JoinListener implements Listener {
 
-    @EventHandler()
+    @EventHandler
     public void onJoin(PlayerJoinEvent evt) {
         Player p = evt.getPlayer();
         if (!p.hasPlayedBefore()) {

@@ -16,31 +16,18 @@
  */
 package net.daboross.bukkitdev.ncommon;
 
-import net.daboross.bukkitdev.commandexecutorbase.ColorList;
+import static net.daboross.bukkitdev.commandexecutorbase.ColorList.*;
 
-public class MessageFormats {
-
-    public static final MessageFormats DEFAULT;
-
-    static {
-        DEFAULT = new MessageFormats(
-                "%s" + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s",
-                ColorList.NAME + "%s" + ColorList.REG + ": " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s" + ColorList.REG + ", " + ColorList.DATA + "%s");
-    }
+public class Messages {
 
     /**
      * First parameter is server name, Second parameter is X, Third parameter is
      * Y, Fourth parameter is Z, Fifth parameter is world.
      */
-    public final String whereCommandFormat;
+    public static final String WHERE_CMD = REG + "Location: " + DATA + "%2$s" + REG + ", " + DATA + "%3$s" + REG + ", " + DATA + "%4$s" + REG + ", " + DATA + "%5$s" + REG + ", " + DATA + "%1$s";
     /**
      * First parameter is player name, Second parameter is X, Third parameter is
      * Y, Fourth parameter is Z, Fifth parameter is world.
      */
-    public final String whereIsCommandFormat;
-
-    public MessageFormats(String whereCommandFormat, String whereIsCommandFormat) {
-        this.whereCommandFormat = whereCommandFormat;
-        this.whereIsCommandFormat = whereIsCommandFormat;
-    }
+    public static final String WHERE_IS_CMD = NAME + "%s" + REG + ": " + DATA + "%s" + REG + ", " + DATA + "%s" + REG + ", " + DATA + "%s" + REG + ", " + DATA + "%s";
 }

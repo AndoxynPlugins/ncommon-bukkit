@@ -30,7 +30,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class NCommonPlugin extends JavaPlugin {
 
-    private final MessageFormats formats = MessageFormats.DEFAULT;
     private Permission permission;
 
     @Override
@@ -41,12 +40,8 @@ public final class NCommonPlugin extends JavaPlugin {
         new NCommonBungeeListener(this).register();
         new WhereIsCommand(this).registerIfExists(getCommand("wi"));
         new WhereCommand(this).registerIfExists(getCommand("w"));
-        getPermission();
+        getPermission(pm);
         new RankCommand(permission).setup(this);
-    }
-
-    @Override
-    public void onDisable() {
     }
 
     @Override
@@ -55,15 +50,13 @@ public final class NCommonPlugin extends JavaPlugin {
         return true;
     }
 
-    private void getPermission() {
-        RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
-        permission = rsp.getProvider();
-        if (permission == null) {
-            getLogger().log(Level.SEVERE, "Permissions not found");
+    private void getPermission(PluginManager pm) {
+        if (pm.isPluginEnabled("Vault")) {
+            RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
+            permission = rsp.getProvider();
         }
-    }
-
-    public MessageFormats getFormats() {
-        return formats;
+        if (permission == null) {
+            getLogger().log(Level.WARNING, "Permissions not found");
+        }
     }
 }
