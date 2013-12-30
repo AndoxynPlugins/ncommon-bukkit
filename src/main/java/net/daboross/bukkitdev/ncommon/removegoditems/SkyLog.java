@@ -24,7 +24,7 @@ public class SkyLog {
 
     private static Logger logger = Bukkit.getLogger();
 
-    static void setLogger(Logger logger) {
+    public static void setLogger(Logger logger) {
         SkyLog.logger = logger == null ? Bukkit.getLogger() : logger;
     }
 

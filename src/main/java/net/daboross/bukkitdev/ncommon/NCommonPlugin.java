@@ -22,6 +22,7 @@ import net.daboross.bukkitdev.ncommon.commands.WhereIsCommand;
 import net.daboross.bukkitdev.ncommon.rankdisplay.RankCommand;
 import net.daboross.bukkitdev.ncommon.removegoditems.GodItemChecker;
 import net.daboross.bukkitdev.ncommon.removegoditems.RemoveGodItemsListener;
+import net.daboross.bukkitdev.ncommon.removegoditems.SkyLog;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -36,6 +37,7 @@ public final class NCommonPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        SkyLog.setLogger(getLogger());
         checker = new GodItemChecker(this);
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new RemoveGodItemsListener(this), this);
@@ -45,6 +47,11 @@ public final class NCommonPlugin extends JavaPlugin {
         new WhereCommand(this).registerIfExists(getCommand("w"));
         getPermission(pm);
         new RankCommand(permission).setup(this);
+    }
+
+    @Override
+    public void onDisable() {
+        SkyLog.setLogger(null);
     }
 
     @Override
