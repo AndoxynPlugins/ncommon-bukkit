@@ -16,17 +16,15 @@
  */
 package net.daboross.bukkitdev.ncommon;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.logging.Level;
 import net.daboross.bukkitdev.ncommon.commands.WhereCommand;
 import net.daboross.bukkitdev.ncommon.commands.WhereIsCommand;
 import net.daboross.bukkitdev.ncommon.rankdisplay.RankCommand;
+import net.daboross.bukkitdev.ncommon.removegoditems.GodItemChecker;
 import net.daboross.bukkitdev.ncommon.removegoditems.RemoveGodItemsListener;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -34,9 +32,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class NCommonPlugin extends JavaPlugin {
 
     private Permission permission;
+    private GodItemChecker checker;
 
     @Override
     public void onEnable() {
+        checker = new GodItemChecker(this);
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new RemoveGodItemsListener(this), this);
         pm.registerEvents(new JoinListener(), this);
@@ -61,5 +61,13 @@ public final class NCommonPlugin extends JavaPlugin {
         if (permission == null) {
             getLogger().log(Level.WARNING, "Permissions not found");
         }
+    }
+
+    public boolean isRemove() {
+        return false;
+    }
+
+    public GodItemChecker getChecker() {
+        return checker;
     }
 }

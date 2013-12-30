@@ -16,44 +16,46 @@
  */
 package net.daboross.bukkitdev.ncommon.removegoditems;
 
+import net.daboross.bukkitdev.ncommon.NCommonPlugin;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCreativeEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.plugin.Plugin;
 
 public class RemoveGodItemsListener implements Listener {
 
-    private final GodItemChecker checker;
+    private final NCommonPlugin plugin;
 
-    public RemoveGodItemsListener(Plugin plugin) {
-        checker = new GodItemChecker(plugin);
-    }
-
-    public RemoveGodItemsListener(GodItemChecker checker) {
-        this.checker = checker;
+    public RemoveGodItemsListener(NCommonPlugin plugin) {
+        this.plugin = plugin;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onJoin(PlayerJoinEvent evt) {
-        checker.removeGodEnchants(evt.getPlayer());
+        plugin.getChecker().removeGodEnchants(evt.getPlayer());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onWorldChange(PlayerChangedWorldEvent evt) {
-        checker.runFullCheckNextSecond(evt.getPlayer());
+        plugin.getChecker().runFullCheckNextSecond(evt.getPlayer());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onInventoryGet(InventoryCreativeEvent evt) {
-        checker.removeGodEnchants(evt.getCursor(), evt.getWhoClicked());
+        plugin.getChecker().removeGodEnchants(evt.getCursor(), evt.getWhoClicked());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPickup(PlayerPickupItemEvent evt) {
-        checker.removeGodEnchants(evt.getItem().getItemStack(), evt.getPlayer());
+        plugin.getChecker().removeGodEnchants(evt.getItem().getItemStack(), evt.getPlayer());
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onInventoryMove(InventoryDragEvent evt) {
+        plugin.getChecker().removeGodEnchantsNextTick(evt.getWhoClicked(), evt.getInventorySlots());
     }
 }
